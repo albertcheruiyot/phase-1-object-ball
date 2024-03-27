@@ -116,3 +116,128 @@ function gameObject() {
   }
 
   console.log(gameObject());
+
+// search in the away team
+function numPointsScored(playerName){
+  for (let player in gameObject().home.players) {
+    if (player === playerName) {
+      return gameObject().home.players[player].points;
+    }
+  }
+
+  // search in the away team
+  for (let player in gameObject().away.players) {
+    if (player === playerName) {
+      return gameObject().away.players[player].points;
+    }
+  }
+
+}
+// For example this player has 22
+console.log(`POINTS: ${numPointsScored("Alan Anderson")}`);
+
+function shoeSize(playerName){
+  for (let player in gameObject().home.players) {
+    if (player === playerName) {
+      return gameObject().home.players[player].shoe;
+    }
+  }
+
+  // search in the away team
+  for (let player in gameObject().away.players) {
+    if (player === playerName) {
+      return gameObject().away.players[player].shoe;
+    }
+  }
+
+}
+console.log(`SIZE: ${shoeSize("Alan Anderson")}`);
+
+function teamColors(teamName){
+  const game = gameObject();
+
+  if(game.home.teamName === teamName){
+    return game.home.colors;
+  } else if(game.away.teamName === teamName){
+    return game.away.colors;
+  }
+}
+
+console.log(teamColors("Charlotte Hornets"));
+
+function teamNames(){
+  const game = gameObject();
+
+  const names=[];
+
+  names.push(game.home.teamName);
+  names.push(game.away.teamName);
+
+  return names;
+}
+
+console.log(teamNames());
+
+function playerNumbers(teamName){
+  const game = gameObject();
+
+  const playerNumbers=[];
+
+if(game.home.teamName == teamName){
+  for(const player in game.home.players){
+    playerNumbers.push(game.home.players[player].number);
+  }
+}else if(game.away.teamName == teamName){
+  for(const player in game.away.players){
+    playerNumbers.push(game.away.players[player].number);
+  }
+}
+
+  return playerNumbers;
+}
+
+console.log(playerNumbers("Charlotte Hornets"));
+
+function playerStats(playerName){
+  const game = gameObject();
+
+  for(const player in game.home.players){
+    if(player === playerName){
+      return game.home.players[player];
+    }
+  }
+  for(const player in game.away.players){
+    if(player === playerName){
+      return game.away.players[player];
+    }
+  }
+}
+console.log(playerStats("Charlotte Hornets"));
+
+function bigShoeRebounds(){
+  const game = gameObject();
+  let largestSize = -Infinity;
+
+  for(const player in game.home.players){
+    const shoeSize = game.home.players[player].shoe;
+
+    if(shoeSize>largestSize){
+      largestSize = shoeSize;
+      playerWithLargestShoe = game.home.players[player];
+      getReounds();
+    }
+  }
+  for(const player in game.away.players){
+    const shoeSize = game.away.players[player].shoe;
+    if(shoeSize>largestSize){
+      largestSize = shoeSize;
+      playerWithLargestShoe = game.away.players[player];
+      getReounds();
+    }
+  }
+
+}
+
+function getReounds(){
+  return playerWithLargestShoe.rebounds;
+}
